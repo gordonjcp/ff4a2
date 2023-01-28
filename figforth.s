@@ -23,12 +23,16 @@ BOS       EQU   $60           ; bottom of data stack, in zero-page.
 TOS       EQU   $CE           ; top of data stack, in zero-page.
 N         EQU   $D6           ; scratch workspace.
 IP        EQU   $DE           ; interpretive pointer.
-W         EQU   $E1           ; code field pointer.
-UP        EQU   $E3           ; user area pointer.
-XSAVE     EQU   $E5           ; temporary for X register.
+                              ; moved to not clash with HGR function zeropage
+			      ; variables
+W         EQU   $F1           ; code field pointer.
+UP        EQU   $F3           ; user area pointer.
+XSAVE     EQU   $F5           ; temporary for X register.
 ;
 TIBX      EQU   $0100         ; terminal input buffer of 84 bytes.
-ORIG      EQU   $6100         ; origin of FORTH"s Dictionary.
+                              ; Start of Forth moved down to the second
+                              ; HGR screen page, to allow enough space
+ORIG      EQU   $4000         ; origin of FORTH"s Dictionary.
 MEM       EQU   $9600         ; top of assigned memory+1 byte.
 UAREA     EQU   $9580         ; 128 bytes of user area
 DAREA     EQU   $9170         ; disk buffer space.
@@ -39,7 +43,7 @@ OUTCH     EQU   $FDED         ; output one ASCII char. to term.
 INCH      EQU   $FD0C         ; input one ASCII char. to term.
 TCR       EQU   $FD8E         ; terminal return and line feed.
 ;
-TOP	  EQU   $7939
+TOP	  EQU   $5839
 ;    Boot up parameters. This area provides jump vectors
 ;    to Boot up  code, and parameters describing the system.
 ;
